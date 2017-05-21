@@ -1,0 +1,18 @@
+from:http://www.cnblogs.com/phpshen/p/5842118.html
+
+启用某个服务
+
+# firewall-cmd --zone=public --add-service=https   //临时
+# firewall-cmd --permanent --zone=public --add-service=https  //永久
+开启某个端口
+
+#firewall-cmd --permanent --zone=public --add-port=8080-8081/tcp  //永久
+#firewall-cmd  --zone=public --add-port=8080-8081/tcp   //临时
+使用命令加载设置
+
+#firewall-cmd --reload
+
+设置某个ip 访问某个服务
+
+#firewall-cmd --permanent --zone=public --add-rich-rule="rule family="ipv4"  source address="192.168.0.4/24" service name="http" accept"
+ip 192.168.0.4/24 访问 http

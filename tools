@@ -1,1 +1,3 @@
 第一：通过命令ps aux|grep redis去查看redis进程：
+
+第二： systemctl list-units --type=service #查看所有服务

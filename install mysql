@@ -20,3 +20,35 @@ sudo systemctl start mysqld
 MySQL will bind to localhost (127.0.0.1) by default. Please reference our MySQL remote access guide for information on connecting to your databases using SSH.
 
 Allowing unrestricted access to MySQL on a public IP not advised but you may change the address it listens on by modifying the bind-address parameter in /etc/my.cnf. If you decide to bind MySQL to your public IP, you should implement firewall rules that only allow connections from specific IP addresses.
+
+。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。
+from:http://www.cnblogs.com/Richardzhu/p/3318595.html
+ 1、GRANT命令使用说明：
+
+    先来看一个例子，创建一个只允许从本地登录的超级用户jack，并允许将权限赋予别的用户，密码为：jack.
+
+mysql> grant all privileges on *.* to jack@'localhost' identified by "jack" with grant option;
+Query OK, 0 rows affected (0.01 sec)
+    GRANT命令说明：
+    ALL PRIVILEGES 是表示所有权限，你也可以使用select、update等权限。
+
+    ON 用来指定权限针对哪些库和表。
+
+    *.* 中前面的*号用来指定数据库名，后面的*号用来指定表名。
+
+    TO 表示将权限赋予某个用户。
+
+    jack@'localhost' 表示jack用户，@后面接限制的主机，可以是IP、IP段、域名以及%，%表示任何地方。注意：这里%有的版本不包括本地，以前碰到过给某个用户设置了%允许任何地方登录，但是在本地登录不了，这个和版本有关系，遇到这个问题再加一个localhost的用户就可以了。
+
+    IDENTIFIED BY 指定用户的登录密码。
+
+    WITH GRANT OPTION 这个选项表示该用户可以将自己拥有的权限授权给别人。注意：经常有人在创建操作用户的时候不指定WITH GRANT OPTION选项导致后来该用户不能使用GRANT命令创建用户或者给其它用户授权。
+
+备注：可以使用GRANT重复给用户添加权限，权限叠加，比如你先给用户添加一个select权限，然后又给用户添加一个insert权限，那么该用户就同时拥有了select和insert权限。
+
+    2、刷新权限
+
+    使用这个命令使权限生效，尤其是你对那些权限表user、db、host等做了update或者delete更新的时候。以前遇到过使用grant后权限没有更新的情况，只要对权限做了更改就使用FLUSH PRIVILEGES命令来刷新权限。
+
+mysql> flush privileges;
+Query OK, 0 rows affected (0.01 sec)

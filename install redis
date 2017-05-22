@@ -1,0 +1,25 @@
+ 安装： yum -y install redis
+ 启动/停止/重启 Redis
+ 启动服务： systemctl start redis.service
+ 停止服务：systemctl stop redis.service
+ 
+ 重启服务：systemctl restart redis.service
+ 
+ 检查状态：systemctl status redis.service
+ 
+ 
+ 随系统启动服务： systemctl enable redis.service
+ 
+ 关闭随机启动： systemctl disable redis.service
+
+
+ 添加到防火墙并重启：
+  firewall-cmd --permanent --zone=public --add-port=6379/tcp
+  firewall-cmd --reload
+
+ 启动：客户端：redis-cli 服务端：redis-server
+ 
+ 测试：
+ 
+set a 123
+get a 

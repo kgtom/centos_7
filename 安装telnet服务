@@ -1,0 +1,24 @@
+from:http://www.centoscn.com/image-text/install/2015/0101/4402.html
+
+1. CentOS7.0 telnet-server 启动的问题。
+解决方法：
+    ①、先检查CentOS7.0是否已经安装以下两个安装包:telnet-server、xinetd。命令如下：
+    rpm -qa telnet-server
+    rpm -qa xinetd
+    如果没有安装，则先安装。安装命令：
+[root@master ~]# yum list |grep telnet
+telnet-server.x86_64                    1:0.17-59.el7                  @base    
+telnet.x86_64                           1:0.17-59.el7                  base     
+[root@master ~]# yum install telnet-server.x86_64
+[root@master ~]# yum install telnet.x86_64
+[root@master ~]# yum list |grep xinetd
+xinetd.x86_64                           2:2.3.15-12.el7                @base  
+[root@master ~]# yum install xinetd.x86_64
+ 
+安装完成后，将xinetd服务加入开机自启动:
+    systemctl enable xinetd.service
+将telnet服务加入开机自启动：
+    systemctl enable telnet.socket
+最后，启动以上两个服务即可：
+    systemctl start telnet.socket
+    systemctl start xinetd（或service xinetd start）

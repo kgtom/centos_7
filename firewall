@@ -16,3 +16,13 @@ from:http://www.cnblogs.com/phpshen/p/5842118.html
 
 #firewall-cmd --permanent --zone=public --add-rich-rule="rule family="ipv4"  source address="192.168.0.4/24" service name="http" accept"
 ip 192.168.0.4/24 访问 http
+
+ 删除上面设置的规则
+
+#firewall-cmd --permanent --zone=public --remove-rich-rule="rule family="ipv4"  source address="192.168.0.4/24" service name="http" accept"
+
+systemctl start firewalld.service  //开启服务
+#systemctl enable firewalld.service //开机制动启动
+
+#systemctl stop firewalld.service  //关闭服务
+#systemctl disable firewalld.service //禁止开机启动

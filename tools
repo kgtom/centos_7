@@ -1,0 +1,1 @@
+第一：通过命令ps aux|grep redis去查看redis进程：

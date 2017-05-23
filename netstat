@@ -11,3 +11,7 @@ netstat命令各个参数说明如下：
 [root@localhost ~]# netstat -nlp |grep LISTEN   //查看当前所有监听端口·
 [root@localhost ~]# netstat -nlp |grep 80   //查看所有80端口使用情况·
 [root@localhost ~]# netstat -an | grep 3306   //查看所有3306端口使用情况·
+
+#netstat -tuln //当前运行的端口
+
+

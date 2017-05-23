@@ -1,0 +1,51 @@
+安装
+使用yum安装
+rpm -Uvh https://yum.postgresql.org/9.6/redhat/rhel-7-x86_64/pgdg-centos96-9.6-3.noarch.rpm
+
+yum install postgresql94-server postgresql94-contrib
+
+安装后：
+# yum list installed | grep postgresql
+postgresql96.x86_64                  9.6.3-1PGDG.rhel7              @pgdg96     
+postgresql96-contrib.x86_64          9.6.3-1PGDG.rhel7              @pgdg96     
+postgresql96-libs.x86_64             9.6.3-1PGDG.rhel7              @pgdg96     
+postgresql96-server.x86_64           9.6.3-1PGDG.rhel7              @pgdg96   
+   
+设置开机启动
+
+# systemctl start postgresql-9.6
+# systemctl enable postgresql-9.6
+
+初始化数据库
+
+#/usr/pgsql-9.6/bin/postgresql96-setup initdb (必须备注：root 登录进去 默认root路径下，不是/usr/里面)
+
+开启远程访问
+
+/var/lib/pgsql/9.6/data/postgresql.conf
+
+listen_addresses ='*'
+
+/var/lib/pgsql/9.6/data/pg_hba.conf
+
+# IPv4 local connections:
+host    all             all             127.0.0.1/32            trust
+host    all             all             192.168.0.28/32        trust
+host    all             all             0.0.0.0/0               trust(所有的ip)
+# IPv6 local connections:
+host    all             all             ::1/128                 trust
+
+需要重新载入：
+# /var/lib/pgsql/data pg_ctl reload
+
+修改用户密码
+
+#su postgres
+#psql -U postgres
+#ALTER USER postgres WITH PASSWORD 'abc23'
+\q
+
+防火墙设定及重载
+#firewall-cmd --permanent --zone=public --add-port=5432/tcp
+
+#firewall-cmd --reload

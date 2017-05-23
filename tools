@@ -1,3 +1,11 @@
 第一：通过命令ps aux|grep redis去查看redis进程：
 
 第二： systemctl list-units --type=service #查看所有服务
+
+第三：检测下系统有没有自带的mysql：yum list installed | grep mysql， 
+如果已经有的话执行命令yum -y remove mysql-libs.x86_64卸载已经安装的mysql。 
+第四：查询已安装的软件 rpm qa|grep mysql
+yum list:列出目前yum所管理的所有软件名称与版本，有些类似于rpm -qa
+
+yum search string1 [string2] [...]
+以指定的关键字搜索程序包名及summary信息

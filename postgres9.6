@@ -25,13 +25,14 @@ postgresql96-server.x86_64           9.6.3-1PGDG.rhel7              @pgdg96
 /var/lib/pgsql/9.6/data/postgresql.conf
 
 listen_addresses ='*'
+通常这一行会被注释起来。将注释符号“#”去掉令这一行生效。
 
 /var/lib/pgsql/9.6/data/pg_hba.conf
 
 # IPv4 local connections:
 host    all             all             127.0.0.1/32            trust
 host    all             all             192.168.0.28/32        trust
-host    all             all             0.0.0.0/0               trust(所有的ip)
+host    all             all             0.0.0.0/0               trust(所有的ip,password 需要密码)
 # IPv6 local connections:
 host    all             all             ::1/128                 trust
 
@@ -39,11 +40,21 @@ host    all             all             ::1/128                 trust
 # /var/lib/pgsql/data pg_ctl reload
 
 修改用户密码
+给postgres 用户设置密码
 
-#su postgres
-#psql -U postgres
-#ALTER USER postgres WITH PASSWORD 'abc23'
-\q
+[root@izh ~]# su - postgres
+Last login: Wed May 24 01:23:21 CST 2017 on pts/0
+-bash-4.2$ psql
+psql (9.6.3)
+Type "help" for help.
+
+
+postgres=# \password postgres
+Enter new password: 
+Enter it again: 
+postgres=# 
+
+
 
 防火墙设定及重载
 #firewall-cmd --permanent --zone=public --add-port=5432/tcp

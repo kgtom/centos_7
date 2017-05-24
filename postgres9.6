@@ -66,5 +66,20 @@ postgres=#
 
 防火墙设定及重载
 #firewall-cmd --permanent --zone=public --add-port=5432/tcp
-
 #firewall-cmd --reload
+
+特别注意：每次修改 pg_hab.conf等配置文件，需要重载文件、重启服务
+
+[root@izh5s4gunylub2z /]# cd /var/lib/pgsql/9.6/data
+[root@izh5s4gunylub2z data]# ls
+base          pg_hba.conf    pg_notify     pg_stat_tmp  pg_xlog
+global        pg_ident.conf  pg_replslot   pg_subtrans  postgresql.auto.conf
+pg_clog       pg_log         pg_serial     pg_tblspc    postgresql.conf
+pg_commit_ts  pg_logical     pg_snapshots  pg_twophase  postmaster.opts
+pg_dynshmem   pg_multixact   pg_stat       PG_VERSION   postmaster.pid
+# vi pg_hba.conf
+# cd ~
+# cd /var/lib/pgsql/data pg_ctl reload
+# systemctl restart postgresql-9.6
+
+

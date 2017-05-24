@@ -1,0 +1,16 @@
+
+ 使用useradd命令，运行 useradd --help 看看帮助文件
+
+useradd -o -u 0 -g 0 -M -d /root -s /bin/bash username(使用root用户一样的家目录) username就有root的权限了
+
+passwd username
+
+举个例子：用户名 zibu
+
+# useradd -o -u 0 -g 0 -M -d /root -s /bin/bash zibu
+# passwd zibu
+Changing password for user zibu.
+New password: 
+BAD PASSWORD: The password is shorter than 7 characters
+Retype new password: 
+passwd: all authentication tokens updated successfully.

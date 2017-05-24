@@ -1,0 +1,43 @@
+
+
+package main
+
+import (
+	"fmt"
+	"strconv"
+)
+
+const (
+	WORKER_COUNT = 5
+	ID_COUNT     = 10
+)
+
+type Message struct {
+	id     int
+	result string
+}
+
+func main() {
+	chId := make(chan int, WORKER_COUNT)
+	chResult := make(chan Message, WORKER_COUNT)
+	for i := 0; i < WORKER_COUNT; i++ {
+		go func() {
+			for {
+				id := <-chId
+				chResult <- Message{
+					id:     id,
+					result: strconv.Itoa(id),
+				}
+			}
+		}()
+	}
+	go func() {
+		for i := 0; i < ID_COUNT; i++ {
+			chId <- i
+		}
+	}()
+	for i := 0; i < ID_COUNT; i++ {
+		msg := <-chResult
+		fmt.Printf("id[%d]=>result[%s]\n", msg.id, msg.result)
+	}
+}

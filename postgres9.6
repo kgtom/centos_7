@@ -1,11 +1,20 @@
-安装
+
 使用yum安装
 rpm -Uvh https://yum.postgresql.org/9.6/redhat/rhel-7-x86_64/pgdg-centos96-9.6-3.noarch.rpm
 
 yum install postgresql94-server postgresql94-contrib
 
-安装后：
+是否安装成功
+#rpm -aq| grep postgres 
+
+postgresql96-server-9.6.3-1PGDG.rhel7.x86_64
+postgresql96-9.6.3-1PGDG.rhel7.x86_64
+postgresql96-libs-9.6.3-1PGDG.rhel7.x86_64
+postgresql96-contrib-9.6.3-1PGDG.rhel7.x86_64
+
+或者
 # yum list installed | grep postgresql
+
 postgresql96.x86_64                  9.6.3-1PGDG.rhel7              @pgdg96     
 postgresql96-contrib.x86_64          9.6.3-1PGDG.rhel7              @pgdg96     
 postgresql96-libs.x86_64             9.6.3-1PGDG.rhel7              @pgdg96     
@@ -47,7 +56,6 @@ Last login: Wed May 24 01:23:21 CST 2017 on pts/0
 -bash-4.2$ psql
 psql (9.6.3)
 Type "help" for help.
-
 
 postgres=# \password postgres
 Enter new password: 

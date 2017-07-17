@@ -1,2 +1,18 @@
-from:https://www.docker.com/docker-centos-distribution
+from:https://docs.docker.com/engine/installation/linux/docker-ce/centos/#install-from-a-package
 
+Start Docker.
+
+$ sudo systemctl start docker
+Verify that docker is installed correctly by running the hello-world image.
+
+$ sudo docker run hello-world
+
+
+Uninstall Docker CE
+Uninstall the Docker package:
+
+$ sudo yum remove docker-ce
+Images, containers, volumes, or customized configuration files on your host are not automatically removed. To delete all images, containers, and volumes:
+
+$ sudo rm -rf /var/lib/docker
+You must delete any edited configuration files manually.

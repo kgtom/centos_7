@@ -1,0 +1,39 @@
+
+1.下载压缩包，wget https://www.golangtc.com/static/go/1.8.3/go1.8.3.linux-amd64.tar.gz
+2.解压该文件，由于默认的go路径，在/usr/local下， 所以用如下命令，解压创建/usr/local/go
+tar -C /usr/local -xzf go1.8.3.linux-amd64.tar.gz 
+
+3.配置环境变量，vim /etc/profile下，添加对应的GOROOT和GOPATH 及PATH的配置环境
+
+export PATH USER LOGNAME MAIL HOSTNAME HISTSIZE HISTCONTROL
+
+export GOROOT=/usr/local/go
+export PATH=$GOROOT/bin:$PATH
+export GOPATH=/app/goprojects
+
+4.文件生效
+     
+source /etc/profile 
+
+5.测试是否安装成功 。例如检查go的版本，$ go version 
+
+6.编写demo:
+在gopath下，编写demo，即：在/app/goprojects/src/main.go，
+  具体如下：
+ cd src 
+ vi main.go
+
+ package main
+
+import "fmt"
+
+func main() {
+    fmt.Println("hi go from src")
+}
+
+:wq
+ 
+
+之后，go build main.go，生成了main的文件; 
+　或者直接执行 go run mian.go 直接可以看到结果
+ 输出了 hi go from src .

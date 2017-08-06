@@ -19,29 +19,35 @@ export PATH=$PATH:$GOROOT/bin:$NSQ/nsq:$GOPATH/bin
 6.分别开启 nsqlookupd nsqd nsqadmin ，然后测试，安装官网去做：
 http://nsq.io/overview/quick_start.html
 
-in one shell, start nsqlookupd:
+以下是官网例子，但需要考虑nsq守护进程，确保在shell关闭时，程序仍旧运行。
+可以使用 nohup 命令 & ，例如： nohup nsqlookupd &
 
-$ nsqlookupd
-in another shell, start nsqd:
 
+1.开启nsqlookupd ,in one shell, start nsqlookupd:
+$ nsqlookupd  --->nohup nsqlookupd &
+
+
+2.开启nsqd ,in another shell, start nsqd:
 $ nsqd --lookupd-tcp-address=127.0.0.1:4160
-in another shell, start nsqadmin:
+--->nohup nsqd --lookupd-tcp-address=127.0.0.1:4160 &
 
+3.开启nsqadmin ,in another shell, start nsqadmin:
 $ nsqadmin --lookupd-http-address=127.0.0.1:4161
-publish an initial message (creates the topic in the cluster, too):
+--->nohup  nsqadmin --lookupd-http-address=127.0.0.1:4161 &
 
+4.测试 publish an initial message (creates the topic in the cluster, too):
 $ curl -d 'hello world 1' 'http://127.0.0.1:4151/pub?topic=test'
 finally, in another shell, start nsq_to_file:
 
-$ nsq_to_file --topic=test --output-dir=/tmp --lookupd-http-address=127.0.0.1:4161
+5.创建channel $ nsq_to_file --topic=test --output-dir=/tmp --lookupd-http-address=127.0.0.1:4161
 publish more messages to nsqd:
 
+6.测试发送一些数据
 $ curl -d 'hello world 2' 'http://127.0.0.1:4151/pub?topic=test'
 $ curl -d 'hello world 3' 'http://127.0.0.1:4151/pub?topic=test'
+
 to verify things worked as expected, in a web browser open http://127.0.0.1:4171/ to view the nsqadmin UI and see statistics. Also, check the contents of the log files (test.*.log) written to /tmp.
 
 The important lesson here is that nsq_to_file (the client) is not explicitly told where the test topic is produced, it retrieves this information from nsqlookupd and, despite the timing of the connection, no messages are lost.
-
-
 
 

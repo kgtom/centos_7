@@ -1,0 +1,3 @@
+
+重启：/usr/sbin/nginx -s reload
+

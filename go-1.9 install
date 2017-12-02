@@ -1,0 +1,39 @@
+1.下载go
+
+#cd /home
+#mkdir app
+#cd app
+
+#wget https://storage.googleapis.com/golang/go1.9.linux-amd64.tar.gz
+
+# tar zxvf go1.9.linux-amd64.tar.gz
+
+2.新建GOPATH目录
+# mkdir /home/work
+# vim /etc/profile
+
+export GOROOT=/home/app/go
+export GOBIN=$GOROOT/bin
+export PATH=$PATH:$GOBIN
+export GOPATH=/home/work
+:wq保存
+
+3.使其生效
+#source /etc/profile
+
+4.查看是否配置成功
+# go version
+go version go1.9.1 linux/amd64
+
+5.简单测试：
+# cd /home/work
+# vi hello.go
+package main
+import "fmt"
+func main() {
+    fmt.Println("Hello, 世界")
+}
+# go run hello.go
+Hello, 世界
+
+reference:https://www.cnblogs.com/ylqs/p/7541806.html

@@ -1,18 +1,24 @@
 from:https://docs.docker.com/engine/installation/linux/docker-ce/centos/#install-from-a-package
 
-Start Docker.
+1. 查找 安装包
 
+2.安装
+yum install  https://download.docker.com/linux/centos/7/x86_64/stable/Packages/docker-ce-17.09.0.ce-1.el7.centos.x86_64.rpm
+
+3.开启
 $ sudo systemctl start docker
+
+4.测试一下 使用 hello-world
 Verify that docker is installed correctly by running the hello-world image.
 
 $ sudo docker run hello-world
 
-
-Uninstall Docker CE
-Uninstall the Docker package:
+5.卸载
 
 $ sudo yum remove docker-ce
+
 Images, containers, volumes, or customized configuration files on your host are not automatically removed. To delete all images, containers, and volumes:
 
+6.删除
 $ sudo rm -rf /var/lib/docker
 You must delete any edited configuration files manually.

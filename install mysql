@@ -29,6 +29,10 @@ from:http://www.cnblogs.com/Richardzhu/p/3318595.html
 
 mysql> grant all privileges on *.* to jack@'localhost' identified by "jack" with grant option;
 Query OK, 0 rows affected (0.01 sec)
+
+eg: tom 账号 abc123 密码，任意地方登陆：
+grant all privileges on *.* to tom@'%' identified by "abc123" with grant option;
+
     GRANT命令说明：
     ALL PRIVILEGES 是表示所有权限，你也可以使用select、update等权限。
 

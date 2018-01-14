@@ -1,0 +1,5 @@
+1.上传views 文件夹下的所有文件到 tom用户的根目录
+scp -r views tom@127.0.0.1:~
+
+2.上传文件
+scp -r test.tpl tom@127.0.0.1:~

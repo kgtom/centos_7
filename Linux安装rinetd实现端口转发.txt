@@ -1,0 +1,45 @@
+在Linux系统中大多数情况选择用iptables来实现端口转发，iptables虽然强大，但配置不便，而且新手容易出错。在此分享另一个TCP/UDP端口转发工具rinetd，rinetd体积小巧，配置也很简单。
+
+这篇文章以CentOS 7为例，复制下面的命令输入，一行一个：
+
+安装rinetd
+1，安装依赖
+yum -y install gcc gcc-c++ make
+
+2，下载rinetd
+wget https://github.com/samhocevar/rinetd/releases/download/v0.70/rinetd-0.70.tar.gz
+
+3，解压
+tar xf rinetd-0.70.tar.gz
+
+4，进入目录
+cd rinetd-0.70
+
+5，编译安装
+./bootstrap
+./configure
+make && make install
+
+6，安装后，可以输入rinetd -v查看当前版本。
+[root@localhost rinetd-0.70]# rinetd -v
+rinetd 0.70
+
+配置转发
+1，编辑rinetd配置文件
+vi /usr/local/etc/rinetd.conf
+
+2，填写如下内容
+0.0.0.0 8080 1.1.1.1 80
+
+3，启动rinetd
+rinetd -c /usr/local/etc/rinetd.conf
+
+4，配置参数说明
+0.0.0.0：源IP就是本机监听IP
+8080：源端口
+1.1.1.1：目标IP，为了方便记忆这里可以用域名代替，但是如果域名在本机ping不通会启动失败
+80：目标端口
+
+
+reference:
+https://zhuanlan.zhihu.com/p/246869387
